@@ -11,6 +11,7 @@ app.use(express.json());
 //controllers
 const {
     getAllItems,
+    getAllManagers,
  
 } = require('./db/controllers');
 
@@ -19,6 +20,16 @@ app.get('/', (req, res) => res.send('Welcome to SpareWars Bowling Inventory!'))
 
 app.get('/inventory', (req, res) => {
     getAllItems()
+     .then(data =>  {
+         res.send(data)
+     })
+     .catch((err) => {
+         res.send(err);
+     })   
+ })
+
+app.get('/managers', (req, res) => {
+    getAllManagers()
      .then(data =>  {
          res.send(data)
      })
