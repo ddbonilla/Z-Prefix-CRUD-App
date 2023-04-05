@@ -13,6 +13,17 @@ const addItem = async (item) => {
     return knex('bowling_tbl').insert(item);
 }
 
+const updateItem = async(id, { ItemName, Description, Quantity }) => {
+    return knex('bowling_tbl').where({InvId : id}).update(
+        {  
+            ItemName, 
+            Description, 
+            Quantity
+        },
+        "*"
+    )
+}
+
 const deleteItem = async (id) => {
     return knex('bowling_tbl').where({InvId: id}).delete();
 }
@@ -27,6 +38,7 @@ module.exports = {
     getAllItems,
     getOneItem,
     addItem,
+    updateItem,
     deleteItem,
     getAllManagers
 };

@@ -13,8 +13,9 @@ const {
     getAllItems,
     getOneItem,
     addItem,
-    getAllManagers,
+    updateItem,
     deleteItem,
+    getAllManagers,
  
 } = require('./db/controllers');
 
@@ -66,7 +67,17 @@ app.post('/inventory', (req, res) => {
     }
  })
 
-//PATCH/PUT Requests
+//PUT Requests
+app.put('/inventory/:id', (req, res) => {
+    updateItem(req.params.id, req.body)
+    .then(() => {
+        res.send('item updated')
+    })
+    .catch((err) => {
+        res.send(err);
+    })
+})
+
 //DELETE Requests
 app.delete('/inventory/:id', (req, res) => {
     deleteItem(req.params.id)
