@@ -11,6 +11,7 @@ const Navbar = () => {
   const links = [
     { name: "dashboard", to: "/", icon: "" },
     { name: "inventory", to: "/", icon: "" },
+    { name: "New Item", to: "/", icon: "" },
   ];
 
   const loginLink = (

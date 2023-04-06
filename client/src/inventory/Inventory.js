@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { inventoryContext } from "../App";
 
 import Table from "./Table";
-import Details from "./Details";
 
 const Inventory = () => {
   const { setItems, url } = useContext(inventoryContext);
@@ -22,9 +21,9 @@ const Inventory = () => {
       <div className="col-span-6 place-items-center max-h-fit w-full border border-gray-700">
         <div className="px-9 mt-5">
           <Table />
+    
         </div>
       </div>
-      <Details/>
     </>
   );
 };

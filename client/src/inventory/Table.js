@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 import { inventoryContext } from "../App";
-
 import { SlOptionsVertical } from 'react-icons/sl';
 
 const Table = () => {
@@ -21,7 +20,7 @@ const Table = () => {
         console.log(data);
         setItems(data);
       });
-  }, []);
+  },[]);
 
   return (
     <>
@@ -45,20 +44,20 @@ const Table = () => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                 {items.map((item, i) => (
-                    <tr>
-                      <td key={i} className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap">
+                    <tr key={i}>
+                      <td key={i} className="px-6 py-4 text-left text-xs font-medium text-gray-400 whitespace-nowrap">
                         <SlOptionsVertical/>
                       </td>
-                      <td key={i} className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap">
+                      <td key={i+1} className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap">
                         {item.ItemName}
                       </td>
-                      <td key={i} className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap">
+                      <td key={i+2} className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap">
                         {item.Description}
                       </td>
-                      <td key={i} className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap">
+                      <td key={i+3} className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap">
                         {item.Quantity}
                       </td>
-                      <td key={i} className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap">
+                      <td key={i+4} className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap">
                         {item.UserId}
                       </td>
                     </tr>
