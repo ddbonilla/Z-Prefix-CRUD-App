@@ -1,0 +1,18 @@
+---
+version: "3.8"
+services:
+  bowling_db:
+    container_name: bowling_db
+    hostname: bowling_db
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    volumes:
+      - bowling_db_vol:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: bowling_inventory
+volumes:
+  bowling_db_vol: null
