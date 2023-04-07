@@ -24,6 +24,8 @@ const {
   getManagers,
   createUser,
   getUserName,
+  getUserItems,
+
 } = require("./db/controllers");
 const { Password } = require("@mui/icons-material");
 
@@ -146,5 +148,17 @@ app.post("/login", async (req, res) => {
   console.log("sending user", {Username: userData.Username, isManager: userData.isManager});
   res.status(200).json({Username: userData.Username, isManager: userData.isManager})
 });
+
+app.get('/dashboard/:name', (req, res) => {
+  getUserItems(req.params.name)
+    .then(data => {
+      res.send(data)
+    })
+    .catch((err)=>{
+      res.send(err);
+    })
+})
+
+
 
 module.exports = app;
