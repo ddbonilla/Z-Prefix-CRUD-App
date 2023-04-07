@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // import Modal from "../common/Modal";
 
 const Inventory = () => {
-  const { items, setItems, url } = useContext(inventoryContext);
+  const { user, items, setItems, url } = useContext(inventoryContext);
   const [totalEntries, setTotalEntries] = useState();
   // const [showModal, setShowModal] = useState(false);
 
@@ -24,12 +24,11 @@ const Inventory = () => {
       });
   }, []);
 
-
-
   return (
     <>
       <div className="col-span-6 place-items-center max-h-fit w-full border border-gray-700">
         <div className="px-9 mt-5">
+          {!user.Username ? null : <div>currently Log as: {user.Username}</div>}
           <div className="px-10 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
             Total Items: {totalEntries}
           </div>
@@ -64,7 +63,7 @@ const Inventory = () => {
                                 to={`/inventory/${item.InvId}`}
                                 className="px-6 py-4 text-left text-xs font-medium text-blue-700 whitespace-nowrap"
                               >
-                                {item.InvId} {item.ItemName}
+                                {item.ItemName}
                               </Link>
                             </td>
                             <td
@@ -83,13 +82,12 @@ const Inventory = () => {
                               key={i + 4}
                               className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                             >
-                              {item.UserId}
+                              {item.Username}
                             </td>
                             <td
                               key={i + 5}
                               className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
-                            >
-                            </td>
+                            ></td>
                           </tr>
                         ))
                       ) : (

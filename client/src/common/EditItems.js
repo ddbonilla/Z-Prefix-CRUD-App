@@ -52,10 +52,10 @@ const EditItems = () => {
         {details ? (
           <>
             {details.map((detail, i) => (
-              <>
-                <div className="">
+              <div key={i+20}>
+                <div key={i}>
                   <form
-                    id=""
+                    key={i+1}
                     className="w-full max-w-sm"
                     onSubmit={(e) => {
                       e.preventDefault();
@@ -76,17 +76,22 @@ const EditItems = () => {
                       });
                     }}
                   >
-                    <div className="flex flex-col md: items-center mb-6">
-                      <div className="md:w-1/3">
+                    <div
+                      key={i+2}
+                      className="flex flex-col md: items-center mb-6"
+                    >
+                      <div key={i+3} className="md:w-1/3">
                         <label
+                          key={i+4}
                           htmlFor="name"
                           className="block text-gray-500 font-bold text-left mb-1"
                         >
                           Item Name
                         </label>
                       </div>
-                      <div className="md:w-2/3 ml-5">
+                      <div key={i+5} className="md:w-2/3 ml-5">
                         <input
+                          key={i+6}
                           id="name"
                           type="text"
                           className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-md p-1"
@@ -95,16 +100,18 @@ const EditItems = () => {
                           onChange={(e) => setDetails(e.target.value)}
                         />
                       </div>
-                      <div className="md:w-1/3">
+                      <div key={i+7} className="md:w-1/3">
                         <label
+                          key={i+8}
                           htmlFor="desc"
                           className="block text-gray-500 font-bold text-left mb-1"
                         >
                           Description
                         </label>
                       </div>
-                      <div className="md:w-2/3 ml-5">
+                      <div key={i+9} className="md:w-2/3 ml-5">
                         <input
+                          key={i+10}
                           id="desc"
                           type="text"
                           className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-md p-1"
@@ -113,16 +120,18 @@ const EditItems = () => {
                           onChange={(e) => setDetails(e.target.value)}
                         />
                       </div>
-                      <div className="md:w-1/3">
+                      <div key={i+11} className="md:w-1/3">
                         <label
+                          key={i+12}
                           htmlFor="qty"
                           className="block text-gray-500 font-bold text-left mb-1"
                         >
                           Quantity
                         </label>
                       </div>
-                      <div className="md:w-2/3 ml-5">
+                      <div key={i+13} className="md:w-2/3 ml-5">
                         <input
+                          key={i+14}
                           id="qty"
                           type="text"
                           className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-md p-1"
@@ -131,16 +140,18 @@ const EditItems = () => {
                           onChange={(e) => setDetails(e.target.value)}
                         />
                       </div>
-                      <div className="md:w-1/3">
+                      <div key={i+15} className="md:w-1/3">
                         <label
+                          key={i+16}
                           htmlFor="manager"
                           className="block text-gray-500 font-bold text-left mb-1"
                         >
                           Manager
                         </label>
                       </div>
-                      <div className="md:w-2/3 ml-5">
+                      <div key={i+17} className="md:w-2/3 ml-5">
                         <input
+                          key={i+18}
                           id="manager"
                           type="text"
                           className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-md p-1"
@@ -151,23 +162,22 @@ const EditItems = () => {
                       </div>
                     </div>
                   </form>
-
                   <button
-                    key={i + 6}
+                    key={i + 19}
                     onClick={() => {
                       fetch(`${url}/inventory/${detail.InvId}`, {
                         method: "DELETE",
                       }).then(() => {
                         console.log("deleted...");
                         setShowModal(false);
-                        navigate('/inventory')
+                        navigate("/inventory");
                       });
                     }}
                   >
-                    <RiDeleteBinLine /> 
+                    <RiDeleteBinLine />
                   </button>
                 </div>
-              </>
+              </div>
             ))}
           </>
         ) : null}

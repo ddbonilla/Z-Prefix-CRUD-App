@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { inventoryContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { VscSaveAs } from "react-icons/vsc";
