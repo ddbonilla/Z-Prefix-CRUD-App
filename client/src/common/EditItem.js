@@ -1,25 +1,37 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { inventoryContext } from "../App";
 
 const EditItems = () => {
-  const { items, setItems, url } = useContext(inventoryContext);
-  const params = useParams();
-
-
+  const { url } = useContext(inventoryContext);
+  const [details, setDetails] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
-    fetch(`${url}/inventory/${params.id}`)
-    .then((res) => res.json())
-    .then((data)=> {
-        console.log("look", data);
-        setItems(data);
-    })
-  },[params.id]);
+    console.log("useEffect");
+    fetch(`${url}/inventory/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setDetails(data);
+        console.log(data);
+      });
+  }, []);
 
   return (
     <div className="flex justify-center mt-20">
-      <div>{params.id}</div>
+      {details ? (
+        <>
+          {details.map((detail, i) => (
+            <div className="flex flex-col">
+              <p>{detail.InvId}</p>
+              <p>{detail.ItemName}</p>
+              <p>{detail.Description}</p>
+              <p>{detail.Quantity}</p>
+              <p>{detail.UserId}</p>
+            </div>
+          ))}
+        </>
+      ) : null}
     </div>
   );
 };

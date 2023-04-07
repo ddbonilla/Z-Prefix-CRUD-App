@@ -26,7 +26,7 @@ const Inventory = () => {
       });
   }, []);
 
-  console.log(items);
+  // console.log(items);
 
   return (
     <>
@@ -91,7 +91,21 @@ const Inventory = () => {
                               key={i + 5}
                               className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                             >
-                              <DeleteItem id={item.InvId} />
+                              {/* <DeleteItem id={item.InvId} /> */}
+                              <button
+                                key={i + 6}
+                                onClick={(e) => {
+                                  fetch(`${url}/inventory/${item.InvId}`, {
+                                    method: "DELETE"
+                                  })
+                                  .then (()=> {
+                                    console.log("deleted...")
+                                  })
+              
+                                }}
+                              >
+                                <RiDeleteBinLine/>
+                              </button>
                             </td>
                           </tr>
                         ))

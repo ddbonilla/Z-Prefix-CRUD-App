@@ -7,7 +7,7 @@ import Navbar from "./common/Navbar";
 import Login from "./admin/Login";
 import Inventory from "./inventory/Inventory";
 import NotFound from "./common/NotFound";
-import Details from "./inventory/Details";
+// import Details from "./inventory/Details";
 import AddItem from "./common/AddItem";
 import EditItem from "./common/EditItem";
 
@@ -31,7 +31,6 @@ function App() {
             <Route path="/*" element={<NotFound />} />
           </Routes>
         </div>
-          <Details/>
       </div>
     </inventoryContext.Provider>
   );
