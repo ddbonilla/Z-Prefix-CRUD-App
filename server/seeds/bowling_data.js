@@ -1,14 +1,17 @@
+const { Password } = require("@mui/icons-material");
+const bcrypt = require("bcrypt");
+
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
 
 const users = [
-  { Username: "Jason1", Password: "password", isManager: false },
-  { Username: "Joseph2", Password: "password", isManager: false },
-  { Username: "Jacob3", Password: "password", isManager: true },
-  { Username: "Kyle4", Password: "password", isManager: false },
-  { Username: "David5", Password: "password", isManager: true },
+  { Username: "Jason1", Password: bcrypt.hashSync("password", 10), isManager: false },
+  { Username: "Joseph2", Password: bcrypt.hashSync("password", 10), isManager: false },
+  { Username: "Jacob3", Password: bcrypt.hashSync("password", 10), isManager: true },
+  { Username: "Kyle4", Password: bcrypt.hashSync("password", 10), isManager: false },
+  { Username: "David5", Password: bcrypt.hashSync("password", 10), isManager: true },
 ];
 
 const bowlingItems = [

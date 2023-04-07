@@ -2,11 +2,15 @@ const knex = require("./dbConnection");
 
 //bowling_table queries
 const getAllItems = () => {
-  return knex.select("*").from("bowling_tbl");
+  return knex.select("*").from("bowling_tbl").join("users_tbl", "users_tbl.id", "bowling_tbl.UserId");
 };
 
 const getOneItem = (id) => {
   return knex.select("*").from("bowling_tbl").where("InvId", "=", parseInt(id));
+};
+
+const getUserItem = (id) => {
+  return knex.select("*").from("bowling_tbl").join("users_tbl", "users_tbl.id", "bowling_tbl.UserId").where("InvId", "=", parseInt(id));
 };
 
 const addItem = (item) => {
@@ -33,12 +37,14 @@ const getManagers = () => {
 };
 
 const getUserName = (username) => {
-  return knex("users_tbl").where("Username", "ilike", username);
-}
+  return knex("users_tbl")
+    .select("Username", "Password", "isManager")
+    .where("Username", "ilike", username);
+};
 
 const createUser = (user) => {
   return knex("users_tbl").insert(user);
-}
+};
 
 const deleteUser = (id) => {
   return knex("users_tbl").where({ id: id }).delete().returning("*");
@@ -54,4 +60,5 @@ module.exports = {
   getUserName,
   createUser,
   deleteUser,
+  getUserItem,
 };
