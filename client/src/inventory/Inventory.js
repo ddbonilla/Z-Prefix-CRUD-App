@@ -28,7 +28,8 @@ const Inventory = () => {
     <>
       <div className="col-span-6 place-items-center max-h-fit w-full border border-gray-700">
         <div className="px-9 mt-5">
-          {!user.Username ? null : <div>currently Log as: {user.Username}</div>}
+          {!user.Username ? null : <div className="italic text-sm">Inventory Manager: <span className="font-semibold">{user.Username}</span></div>}
+          <hr className="p-2"/>
           <div className="px-10 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
             Total Items: {totalEntries}
           </div>

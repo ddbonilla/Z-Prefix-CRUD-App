@@ -8,8 +8,8 @@ import Login from "./admin/Login";
 import Register from "./admin/Register";
 import Inventory from "./inventory/Inventory";
 import MyItems from "./inventory/MyItems";
-import AddItem from "./common/AddItem";
-import EditItem from "./common/EditItems";
+import AddItem from "./inventory/AddItem";
+import EditItem from "./inventory/EditItems";
 import NotFound from "./common/NotFound";
 
 export const inventoryContext = createContext();

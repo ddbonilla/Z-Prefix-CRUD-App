@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { inventoryContext } from "../App";
-import Modal from "./Modal";
+import Modal from "../common/Modal";
 import { RiDeleteBinLine } from "react-icons/ri";
 
 const EditItems = () => {

@@ -1,12 +1,14 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { inventoryContext } from "../App";
+import "./common.css";
 
 //icons
 import { FaBowlingBall } from "react-icons/fa";
 import { RiDashboardFill } from "react-icons/ri";
 import { MdOutlineInventory } from "react-icons/md";
 import { AiOutlineFileAdd, AiOutlineUser } from "react-icons/ai";
+import { GiBowlingPin } from "react-icons/gi";
 
 const Navbar = () => {
   const [open, setOpen] = useState(true);
@@ -30,11 +32,16 @@ const Navbar = () => {
         Inventory
       </span>
     </Link>
-  )
+  );
 
   const managerLinks = [
-    { name: "Dashboard", to: "/", icon: "" , isVisible: isVisible },
-    { name: "New Item", to: "/", icon: <AiOutlineFileAdd /> , isVisible: isVisible },
+    { name: "Dashboard", to: "/", icon: "", isVisible: isVisible },
+    {
+      name: "New Item",
+      to: "/",
+      icon: <AiOutlineFileAdd />,
+      isVisible: isVisible,
+    },
   ];
 
   let loginLink = (
@@ -60,9 +67,9 @@ const Navbar = () => {
       <Link
         to="Login"
         onClick={() => {
-          setUser({})
-          setIsVisible(isVisible)
-          }}
+          setUser({});
+          setIsVisible(isVisible);
+        }}
         className={
           "text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white"
         }
@@ -77,7 +84,7 @@ const Navbar = () => {
         </span>
       </Link>
     );
-  } 
+  }
 
   return (
     <>
@@ -86,13 +93,16 @@ const Navbar = () => {
         ${open ? "w-72" : "w-20"} duration-300`}
       >
         <FaBowlingBall
-          className={`absolute -right-3 top-9 rounded-full bg-emerald-900 text-white text-3xl 
-            cursor-pointer ${!open && "rotate-180"}`}
+          className={`brand absolute -right-4 top-7 rounded-full bg-emerald-900 text-white text-3xl
+            cursor-pointer ${!open && "rotate-[360deg]"} duration-300`}
           onClick={() => setOpen(!open)}
         />
-        <div className="inline-flex">
+        <div className="inline-flex py-6 px-5">
+          <GiBowlingPin
+            className="relative text-white bg-emerald-500 text-4xl rounded-full cursor-pointer block float-left mr-1"
+          />
           <h1
-            className={`brand text-white text-4xl font-medium origin-left p-6
+            className={` text-white text-4xl font-medium 
                 ${!open && "scale-0"} duration-300`}
           >
             Inventory
@@ -109,7 +119,9 @@ const Navbar = () => {
                   key={i}
                   to={link.name}
                   className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2
-                          hover:bg-light-white ${!user.Username && isVisible && "hidden"} `}
+                          hover:bg-light-white ${
+                            !user.Username && isVisible && "hidden"
+                          } `}
                 >
                   <span key={i} className={`text-xl block float-left`}>
                     {link.icon ? link.icon : <RiDashboardFill />}
@@ -126,7 +138,6 @@ const Navbar = () => {
               </div>
             ))}
           </div>
-
         </div>
       </div>
     </>

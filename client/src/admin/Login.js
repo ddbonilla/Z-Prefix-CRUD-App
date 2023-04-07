@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { inventoryContext } from "../App";
 import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
-  const { user, setUser, url } = useContext(inventoryContext);
+  const { setUser, url } = useContext(inventoryContext);
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -12,8 +12,6 @@ const Login = () => {
     const form = e.target;
     const formData = new FormData(form);
     const formJSON = Object.fromEntries(formData.entries());
-
-    console.log(formJSON);
       
     fetch(`${url}/login`, {
       method: "POST",
@@ -22,7 +20,6 @@ const Login = () => {
       })
       .then(res => res.json())
       .then((data) => {
-        console.log("received", data);
         setUser(data)
         navigate("/inventory");
       });
