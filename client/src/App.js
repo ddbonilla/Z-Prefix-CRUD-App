@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
@@ -19,16 +19,6 @@ function App() {
   const [user, setUser] = useState({});
 
   const url = "http://localhost:3001";
-
-  // useEffect(()=> {
-  //   fetch(`${url}/managers`, {
-  //     method: "POST",
-  //     "Access-Control-Allow-Origin" : "*",
-  //     credentials: "include",
-  //   })
-  //   .then((res) => res.json())
-  //   .then((userData) => setUser(userData));
-  // }, [])
 
   return (
     <inventoryContext.Provider value={{ items, setItems, user, setUser, url }}>

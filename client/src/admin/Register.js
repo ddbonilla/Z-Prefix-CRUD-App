@@ -25,7 +25,7 @@ const Register = () => {
       body: JSON.stringify(user),
     }).then(() => {
       console.log("new user added");
-      navigate("/inventory");
+      navigate("/login");
     });
   };
 

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { VscSaveAs } from "react-icons/vsc";
 
 const AddItem = () => {
-  const { url } = useContext(inventoryContext);
+  const { user, url } = useContext(inventoryContext);
   const [isPending, setIsPending] = useState(false);
 
   const navigate = useNavigate();
@@ -13,6 +13,8 @@ const AddItem = () => {
   const [itemDesc, setItemDesc] = useState("");
   const [itemQty, setItemQty] = useState(1);
   const [manager, setManager] = useState("");
+
+  console.log(user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,6 +41,11 @@ const AddItem = () => {
 
   return (
     <div className="p-8 col-span-2 place-items-center h-screen w-full">
+      <div className="italic text-sm">
+        Inventory Manager:{" "}
+        <span className="font-semibold">{user.Username}</span>
+      </div>
+      <hr className="p-2" />
       <div className="flex items-center justify-start py-12 px-4">
         <div className="max-w-full w-full space-y-8">
           <div className="mb-10">
@@ -97,27 +104,22 @@ const AddItem = () => {
                     className="rounded-md bg-gray-100 border-gray-300 max-w-full mb-2 px-2"
                     value={manager}
                     onChange={(e) => setManager(e.target.value)}
-                    required
                   />
                 </div>
                 <div className="text-right m-4 text-lg min-w-fit">
                   {!isPending && (
-                    <button 
+                    <button
                       type="submit"
                       className="bg-emerald-400 p-3 rounded-md"
                     >
-                        <VscSaveAs />
+                      <VscSaveAs />
                     </button>
                   )}
                   {isPending && (
-                    <button 
-                      disabled
-                      className="bg-emerald-400 p-3 rounded-md"
-                    >
+                    <button disabled className="bg-emerald-400 p-3 rounded-md">
                       Saving...
                     </button>
                   )}
-
                 </div>
               </form>
             </div>
@@ -129,4 +131,3 @@ const AddItem = () => {
 };
 
 export default AddItem;
-

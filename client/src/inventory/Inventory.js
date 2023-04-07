@@ -28,8 +28,13 @@ const Inventory = () => {
     <>
       <div className="col-span-6 place-items-center max-h-fit w-full border border-gray-700">
         <div className="px-9 mt-5">
-          {!user.Username ? null : <div className="italic text-sm">Inventory Manager: <span className="font-semibold">{user.Username}</span></div>}
-          <hr className="p-2"/>
+          {!user.Username ? null : (
+            <div className="italic text-sm">
+              Inventory Manager:{" "}
+              <span className="font-semibold">{user.Username}</span>
+            </div>
+          )}
+          <hr className="p-2" />
           <div className="px-10 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
             Total Items: {totalEntries}
           </div>
@@ -38,7 +43,7 @@ const Inventory = () => {
               <div className="py-2 align-middle inline-block min-w-full">
                 <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                   <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+                    <thead className="bg-gray-200">
                       <tr>
                         {headers.map((header, i) => (
                           <th
@@ -51,50 +56,83 @@ const Inventory = () => {
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {items.length ? (
-                        items.map((item, i) => (
-                          <tr key={i}>
-                            <td
-                              key={i}
-                              className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
-                            >
-                              <Link
+                    {user.Username ? (
+                      <tbody className="bg-white divide-y divide-gray-200">
+                        {items.length ? (
+                          items.map((item, i) => (
+                            <tr key={i}>
+                              <td
                                 key={i}
-                                to={`/inventory/${item.InvId}`}
-                                className="px-6 py-4 text-left text-xs font-medium text-blue-700 whitespace-nowrap"
+                                className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
+                              >
+                                <Link
+                                  key={i}
+                                  to={`/inventory/${item.InvId}`}
+                                  className="px-6 py-4 text-left text-xs font-medium text-blue-700 whitespace-nowrap"
+                                >
+                                  {item.ItemName}
+                                </Link>
+                              </td>
+                              <td
+                                key={i + 2}
+                                className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
+                              >
+                                {item.Description}
+                              </td>
+                              <td
+                                key={i + 3}
+                                className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
+                              >
+                                {item.Quantity}
+                              </td>
+                              <td
+                                key={i + 4}
+                                className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
+                              >
+                                {item.Username}
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <></>
+                        )}
+                      </tbody>
+                    ) : (
+                      <tbody className="bg-white divide-y divide-gray-200">
+                        {items.length ? (
+                          items.map((item, i) => (
+                            <tr key={i}>
+                              <td
+                                key={i+1}
+                                className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                               >
                                 {item.ItemName}
-                              </Link>
-                            </td>
-                            <td
-                              key={i + 2}
-                              className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
-                            >
-                              {item.Description}
-                            </td>
-                            <td
-                              key={i + 3}
-                              className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
-                            >
-                              {item.Quantity}
-                            </td>
-                            <td
-                              key={i + 4}
-                              className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
-                            >
-                              {item.Username}
-                            </td>
-                            <td
-                              key={i + 5}
-                              className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
-                            ></td>
-                          </tr>
-                        ))
-                      ) : (
-                        <></>
-                      )}
-                    </tbody>
+                              </td>
+                              <td
+                                key={i+2}
+                                className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
+                              >
+                                {item.Description}
+                              </td>
+                              <td
+                                key={i+3}
+                                className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
+                              >
+                                {item.Quantity}
+                              </td>
+                              <td
+                                key={i+4}
+                                className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
+                              >
+                                {item.Username}
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <></>
+                        )}
+                      </tbody>
+                    )}
                   </table>
                 </div>
               </div>
