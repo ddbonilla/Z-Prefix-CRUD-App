@@ -1,6 +1,6 @@
 import { useState } from "react";
-
 import { Link } from "react-router-dom";
+import Modal from "../common/Modal";
 
 //icons
 import { FaBowlingBall } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { RiDashboardFill } from "react-icons/ri";
 
 const Navbar = () => {
   const [open, setOpen] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const links = [
     { name: "Inventory", to: "/", icon: "" },

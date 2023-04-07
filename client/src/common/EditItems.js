@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { inventoryContext } from "../App";
 import Modal from "./Modal";
+import { RiDeleteBinLine } from "react-icons/ri";
 
 const EditItems = () => {
   const { url } = useContext(inventoryContext);
@@ -150,6 +151,21 @@ const EditItems = () => {
                       </div>
                     </div>
                   </form>
+
+                  <button
+                    key={i + 6}
+                    onClick={() => {
+                      fetch(`${url}/inventory/${detail.InvId}`, {
+                        method: "DELETE",
+                      }).then(() => {
+                        console.log("deleted...");
+                        setShowModal(false);
+                        navigate('/inventory')
+                      });
+                    }}
+                  >
+                    <RiDeleteBinLine /> 
+                  </button>
                 </div>
               </>
             ))}
@@ -161,13 +177,3 @@ const EditItems = () => {
 };
 
 export default EditItems;
-
-// {details.map((detail, i) => (
-//   <div className="flex flex-col">
-//     <p key={i}>{detail.InvId}</p>
-//     <p key={i + 1}>{detail.ItemName}</p>
-//     <p key={i + 2}>{detail.Description}</p>
-//     <p key={i + 3}>{detail.Quantity}</p>
-//     <p key={i + 4}>{detail.UserId}</p>
-//   </div>
-// ))}

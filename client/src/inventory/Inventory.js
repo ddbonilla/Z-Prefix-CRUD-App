@@ -1,10 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { inventoryContext } from "../App";
 import { Link } from "react-router-dom";
-import DeleteItem from "../common/DeleteItem";
-import { RiDeleteBinLine } from "react-icons/ri";
 // import Modal from "../common/Modal";
-import EditItems from "../common/EditItems";
 
 const Inventory = () => {
   const { items, setItems, url } = useContext(inventoryContext);
@@ -16,20 +13,18 @@ const Inventory = () => {
     { name: "Description" },
     { name: "Quantity" },
     { name: "Logged By" },
-    { name: <RiDeleteBinLine /> },
   ];
 
   useEffect(() => {
     fetch(`${url}/inventory`)
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         setItems(data);
         setTotalEntries(data.length);
       });
   }, []);
 
-  // console.log(items);
+
 
   return (
     <>
@@ -94,22 +89,6 @@ const Inventory = () => {
                               key={i + 5}
                               className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                             >
-                              {/* <DeleteItem id={item.InvId} />
-                              <button
-                                key={i + 6}
-                                onClick={(e) => {
-                                  fetch(`${url}/inventory/${item.InvId}`, {
-                                    method: "DELETE"
-                                  })
-                                  .then (()=> {
-                                    console.log("deleted...")
-                                  })
-              
-                                }}
-                              >
-                                <RiDeleteBinLine/>
-                              </button> */}
-                              {/* <button onClick={() => setShowModal(true)}>Edit</button> */}
                             </td>
                           </tr>
                         ))

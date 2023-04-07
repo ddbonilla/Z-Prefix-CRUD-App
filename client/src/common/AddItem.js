@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { inventoryContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import Modal from "../common/Modal";
 
 const AddItem = () => {
   const { url } = useContext(inventoryContext);
   const [isPending, setIsPending] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const navigate = useNavigate();
 
