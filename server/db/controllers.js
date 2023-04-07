@@ -1,44 +1,57 @@
-const knex = require('./dbConnection');
+const knex = require("./dbConnection");
 
 //bowling_table queries
-const getAllItems = async () => {
-    return knex.select('*').from('bowling_tbl')
+const getAllItems = () => {
+  return knex.select("*").from("bowling_tbl");
+};
+
+const getOneItem = (id) => {
+  return knex.select("*").from("bowling_tbl").where("InvId", "=", parseInt(id));
+};
+
+const addItem = (item) => {
+  return knex("bowling_tbl").insert(item);
+};
+
+const updateItem = (id, { ItemName, Description, Quantity }) => {
+  return knex("bowling_tbl")
+    .where({ InvId: id })
+    .update({
+      ItemName,
+      Description,
+      Quantity,
+    })
+    .returning("*");
+};
+
+const deleteItem = (id) => {
+  return knex("bowling_tbl").where({ InvId: id }).delete().returning("*");
+};
+
+const getManagers = () => {
+  return knex.select("*").from("users_tbl");
+};
+
+const getUserName = (username) => {
+  return knex("users_tbl").where("Username", "ilike", username);
 }
 
-const getOneItem = async (item) => {
-    return knex.select('*').from('bowling_tbl').where('ItemName', 'ilike', `%${item}%`);
+const createUser = (user) => {
+  return knex("users_tbl").insert(user);
 }
 
-const addItem = async (item) => {
-    return knex('bowling_tbl').insert(item);
-}
-
-const updateItem = async(id, { ItemName, Description, Quantity }) => {
-    return knex('bowling_tbl').where({InvId : id}).update(
-        {  
-            ItemName, 
-            Description, 
-            Quantity
-        },
-        "*"
-    )
-}
-
-const deleteItem = async (id) => {
-    return knex('bowling_tbl').where({InvId: id}).delete();
-}
-
-
-//users_table queries
-const getAllManagers = async () => {
-    return knex.select('*').from('users_tbl')
-}
+const deleteUser = (id) => {
+  return knex("users_tbl").where({ id: id }).delete().returning("*");
+};
 
 module.exports = {
-    getAllItems,
-    getOneItem,
-    addItem,
-    updateItem,
-    deleteItem,
-    getAllManagers
+  getAllItems,
+  getOneItem,
+  addItem,
+  updateItem,
+  deleteItem,
+  getManagers,
+  getUserName,
+  createUser,
+  deleteUser,
 };
