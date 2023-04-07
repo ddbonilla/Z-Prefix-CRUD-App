@@ -4,17 +4,17 @@ import "./App.css";
 
 //components
 import Navbar from "./common/Navbar";
-import Dashboard from "./home/Dashboard";
 import Login from "./admin/Login";
 import Inventory from "./inventory/Inventory";
 import NotFound from "./common/NotFound";
 import Details from "./inventory/Details";
 import AddItem from "./common/AddItem";
+import EditItem from "./common/EditItem";
 
 export const inventoryContext = createContext();
 
 function App() {
-  const [items, setItems] = useState();
+  const [items, setItems] = useState([]);
   const url = "http://localhost:3001";
 
   return (
@@ -23,10 +23,10 @@ function App() {
         <Navbar />
         <div className="grid grid-flow-col w-full h-screen">
           <Routes>
-            <Route exact path="/" element={<Dashboard />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route exact path="/" element={<Inventory />} />
             <Route path="/login" element={<Login />} />
             <Route path="/inventory" element={<Inventory />} />
+            <Route path="/inventory/:id" element={<EditItem />} />
             <Route path="/new item" element={<AddItem />} />
             <Route path="/*" element={<NotFound />} />
           </Routes>

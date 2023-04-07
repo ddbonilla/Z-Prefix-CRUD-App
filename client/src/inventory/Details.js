@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Details = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <>

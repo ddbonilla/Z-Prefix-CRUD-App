@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { Link } from "react-router-dom";
 
 //icons
@@ -9,8 +10,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(true);
 
   const links = [
-    { name: "dashboard", to: "/", icon: "" },
-    { name: "inventory", to: "/", icon: "" },
+    { name: "Inventory", to: "/", icon: "" },
     { name: "New Item", to: "/", icon: "" },
   ];
 
@@ -61,8 +61,7 @@ const Navbar = () => {
                 className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2
                         hover:bg-light-white ${link.spacing ? "mt-9" : "mt-2"}`}
               >
-                <span 
-                  key={i} className={`text-xl block float-left`}>
+                <span key={i} className={`text-xl block float-left`}>
                   {link.icon ? link.icon : <RiDashboardFill />}
                 </span>
                 <span
