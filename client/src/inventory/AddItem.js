@@ -10,6 +10,7 @@ const AddItem = () => {
   const navigate = useNavigate();
 
   const [itemName, setItemName] = useState("");
+  const [itemType, setItemType] = useState("");
   const [itemDesc, setItemDesc] = useState("");
   const [itemQty, setItemQty] = useState(1);
   const [manager, setManager] = useState("");
@@ -22,6 +23,7 @@ const AddItem = () => {
     let entry = {
       UserId: manager,
       ItemName: itemName,
+      Type: itemType,
       Description: itemDesc,
       Quantity: itemQty,
     };
@@ -65,6 +67,19 @@ const AddItem = () => {
                     className="rounded-md bg-gray-100 border-gray-300 max-w-full mb-2 px-2"
                     value={itemName}
                     onChange={(e) => setItemName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="flex gap-4 text-right">
+                  <label htmlFor="type" className="w-full">
+                    Item Type
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Type..."
+                    className="rounded-md bg-gray-100 border-gray-300 max-w-full mb-2 px-2"
+                    value={itemType}
+                    onChange={(e) => setItemType(e.target.value)}
                     required
                   />
                 </div>

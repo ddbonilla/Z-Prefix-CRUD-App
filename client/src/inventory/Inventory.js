@@ -10,6 +10,7 @@ const Inventory = () => {
 
   const headers = [
     { name: "Item Name" },
+    { name: "Type" },
     { name: "Description" },
     { name: "Quantity" },
     { name: "Logged By" },
@@ -75,18 +76,24 @@ const Inventory = () => {
                               </td>
                               <td
                                 key={i + 2}
-                                className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
+                                className="desc px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                               >
-                                {item.Description}
+                                {item.Type}
                               </td>
                               <td
                                 key={i + 3}
+                                className="desc px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
+                              >
+                                {item.Description.substring(0,100)+"..."}
+                              </td>
+                              <td
+                                key={i + 4}
                                 className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                               >
                                 {item.Quantity}
                               </td>
                               <td
-                                key={i + 4}
+                                key={i + 5}
                                 className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                               >
                                 {item.Username}
@@ -110,18 +117,24 @@ const Inventory = () => {
                               </td>
                               <td
                                 key={i+2}
-                                className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
+                                className="desc px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                               >
-                                {item.Description}
+                                {item.Type}
                               </td>
                               <td
                                 key={i+3}
+                                className="desc px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
+                              >
+                                {item.Description.substring(0,100)+"..."}
+                              </td>
+                              <td
+                                key={i+4}
                                 className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                               >
                                 {item.Quantity}
                               </td>
                               <td
-                                key={i+4}
+                                key={i+5}
                                 className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                               >
                                 {item.Username}

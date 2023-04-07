@@ -8,6 +8,7 @@ const MyItems = () => {
 
   const headers = [
     { name: "Item Name" },
+    { name: "Type" },
     { name: "Description" },
     { name: "Quantity" },
     { name: "Logged By" },
@@ -74,16 +75,22 @@ const MyItems = () => {
                               key={i + 2}
                               className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                             >
-                              {item.Description}
+                              {item.Type}
                             </td>
                             <td
                               key={i + 3}
                               className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                             >
-                              {item.Quantity}
+                              {item.Description.subString(0,100)+"..."}
                             </td>
                             <td
                               key={i + 4}
+                              className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
+                            >
+                              {item.Quantity}
+                            </td>
+                            <td
+                              key={i + 5}
                               className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                             >
                               {item.Username}
