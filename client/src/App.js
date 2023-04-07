@@ -9,7 +9,7 @@ import Inventory from "./inventory/Inventory";
 import NotFound from "./common/NotFound";
 // import Details from "./inventory/Details";
 import AddItem from "./common/AddItem";
-import EditItem from "./common/EditItem";
+import EditItem from "./common/EditItems";
 
 export const inventoryContext = createContext();
 

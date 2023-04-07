@@ -38,31 +38,39 @@ const AddItem = () => {
 
   return (
     <div className="flex justify-center mt-20">
-      <div>
+      <div className="">
         <form onSubmit={handleSubmit}>
+          <label for="name">Item Name</label>
           <input
             type="text"
+            id="name"
             value={itemName}
             placeholder="Item Name"
             onChange={(e) => setItemName(e.target.value)}
             required
           />
+          <label for="desc">Description</label>
           <input
             type="text"
+            id="desc"
             value={itemDesc}
             placeholder="Description"
             onChange={(e) => setItemDesc(e.target.value)}
             required
           />
+           <label for="qty">Quantity</label>
           <input
             type="text"
+            id="qty"
             value={itemQty}
             placeholder="Quantity"
             onChange={(e) => setItemQty(e.target.value)}
             required
           />
+           <label for="manager">Logged By</label>
           <input
             type="text"
+            id="manager"
             value={manager}
             placeholder="Logged By"
             onChange={(e) => setManager(e.target.value)}

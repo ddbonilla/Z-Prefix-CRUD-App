@@ -3,10 +3,13 @@ import { inventoryContext } from "../App";
 import { Link } from "react-router-dom";
 import DeleteItem from "../common/DeleteItem";
 import { RiDeleteBinLine } from "react-icons/ri";
+// import Modal from "../common/Modal";
+import EditItems from "../common/EditItems";
 
 const Inventory = () => {
   const { items, setItems, url } = useContext(inventoryContext);
   const [totalEntries, setTotalEntries] = useState();
+  // const [showModal, setShowModal] = useState(false);
 
   const headers = [
     { name: "Item Name" },
@@ -91,7 +94,7 @@ const Inventory = () => {
                               key={i + 5}
                               className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                             >
-                              {/* <DeleteItem id={item.InvId} /> */}
+                              {/* <DeleteItem id={item.InvId} />
                               <button
                                 key={i + 6}
                                 onClick={(e) => {
@@ -105,7 +108,8 @@ const Inventory = () => {
                                 }}
                               >
                                 <RiDeleteBinLine/>
-                              </button>
+                              </button> */}
+                              {/* <button onClick={() => setShowModal(true)}>Edit</button> */}
                             </td>
                           </tr>
                         ))
@@ -118,6 +122,11 @@ const Inventory = () => {
               </div>
             </div>
           </div>
+          {/* <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
+            <div className="p-6">
+                
+            </div>
+          </Modal> */}
         </div>
       </div>
     </>
