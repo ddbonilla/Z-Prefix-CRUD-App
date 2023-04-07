@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { inventoryContext } from "../App";
 import { useNavigate } from "react-router-dom";
-import Modal from "../common/Modal";
+import { VscSaveAs } from "react-icons/vsc";
 
 const AddItem = () => {
   const { url } = useContext(inventoryContext);
   const [isPending, setIsPending] = useState(false);
-  const [showModal, setShowModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -34,67 +33,100 @@ const AddItem = () => {
     }).then(() => {
       console.log("new item added");
       setIsPending(false);
-      navigate('/inventory');
+      navigate("/inventory");
     });
   };
 
   return (
-    <div className="flex justify-center mt-20">
-      <div className="">
-        <form onSubmit={handleSubmit}>
-          <label for="name">Item Name</label>
-          <input
-            type="text"
-            id="name"
-            value={itemName}
-            placeholder="Item Name"
-            onChange={(e) => setItemName(e.target.value)}
-            required
-          />
-          <label for="desc">Description</label>
-          <input
-            type="text"
-            id="desc"
-            value={itemDesc}
-            placeholder="Description"
-            onChange={(e) => setItemDesc(e.target.value)}
-            required
-          />
-           <label for="qty">Quantity</label>
-          <input
-            type="text"
-            id="qty"
-            value={itemQty}
-            placeholder="Quantity"
-            onChange={(e) => setItemQty(e.target.value)}
-            required
-          />
-           <label for="manager">Logged By</label>
-          <input
-            type="text"
-            id="manager"
-            value={manager}
-            placeholder="Logged By"
-            onChange={(e) => setManager(e.target.value)}
-            required
-          />
-          {!isPending && (
-            <button
-              type="submit"
-              className="bg-emerald-500 rounded-md text-xs p-2"
-            >
-              Submit
-            </button>
-          )}
-          {isPending && (
-            <button disabled className="bg-emerald-500 rounded-md text-xs p-2">
-              Submitting...
-            </button>
-          )}
-        </form>
+    <div className="p-8 col-span-2 place-items-center h-screen w-full">
+      <div className="flex items-center justify-start py-12 px-4">
+        <div className="max-w-full w-full space-y-8">
+          <div className="mb-10">
+            <h2 className="m-2 text-left text-3xl font-extrabold">
+              Add New Item
+            </h2>
+            <hr />
+            <div className="flex justify-start">
+              <form onSubmit={handleSubmit} className="mt-8 flex flex-col">
+                <div className="flex gap-4 text-right">
+                  <label htmlFor="name" className="w-full">
+                    Item Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Item Name..."
+                    className="rounded-md bg-gray-100 border-gray-300 max-w-full mb-2 px-2"
+                    value={itemName}
+                    onChange={(e) => setItemName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="flex gap-4 text-right">
+                  <label htmlFor="desc" className="w-full">
+                    Item Description
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Description..."
+                    className="rounded-md bg-gray-100 border-gray-300 max-w-full mb-2 px-2"
+                    value={itemDesc}
+                    onChange={(e) => setItemDesc(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="flex gap-4 text-right">
+                  <label htmlFor="qty" className="w-full">
+                    Item Quantity
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Quantity..."
+                    className="rounded-md bg-gray-100 border-gray-300 max-w-full mb-2 px-2"
+                    value={itemQty}
+                    onChange={(e) => setItemQty(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="flex gap-4 text-right">
+                  <label htmlFor="manager" className="w-full">
+                    Logged By
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Manager..."
+                    className="rounded-md bg-gray-100 border-gray-300 max-w-full mb-2 px-2"
+                    value={manager}
+                    onChange={(e) => setManager(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="text-right m-4 text-lg min-w-fit">
+                  {!isPending && (
+                    <button 
+                      type="submit"
+                      className="bg-emerald-400 p-3 rounded-md"
+                    >
+                        <VscSaveAs />
+                    </button>
+                  )}
+                  {isPending && (
+                    <button 
+                      disabled
+                      className="bg-emerald-400 p-3 rounded-md"
+                    >
+                      Saving...
+                    </button>
+                  )}
+
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default AddItem;
+
