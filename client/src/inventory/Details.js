@@ -27,14 +27,36 @@ const Details = () => {
   return (
     <Modal isVisible={showModal} onClose={handleClose}>
       <div>
-        <div className="px-2">Inventory Item</div>
-        <hr className="p-2" />
+        <div className="font-semibold text-emerald-700 text-xl px-4">
+          Inventory Item
+        </div>
+        <hr className="p-2 m-4" />
       </div>
-      <div className="">
-        <p className="m-2 block px-2 w-full">{details.ItemName}</p>
-        <p className="m-2 block px-2 w-full">{details.Type}</p>
-        <p className="m-2 block px-2 w-full">{details.Description}</p>
-        <p className="m-2 block px-2 w-full">{details.Quantity}</p>
+      <div>
+        <div className="grid px-5 mb-4">
+          <label htmlFor="name" className="w-1/2 font-semibold">
+            Item Name
+          </label>
+          <p className="w-full bg-emerald-200 p-2 rounded-md">{details.ItemName}</p>
+        </div>
+        <div className="grid px-5 mb-4">
+          <label htmlFor="type" className="w-1/2 font-semibold">
+            Item Type
+          </label>
+          <p className="w-full bg-emerald-200 p-2 rounded-md">{details.Type}</p>
+        </div>
+        <div className="grid px-5 mb-4">
+          <label htmlFor="desc" className="w-1/2 font-semibold">
+            Item Description
+          </label>
+          <p className="w-full bg-emerald-200 p-2 rounded-md">{details.Description}</p>
+        </div>
+        <div className="grid px-5 mb-4">
+          <label htmlFor="qty" className="w-1/2 font-semibold">
+            Item Quantity
+          </label>
+          <p className="w-full bg-emerald-200 p-2 rounded-md">{details.Quantity}</p>
+        </div>
       </div>
     </Modal>
   );
