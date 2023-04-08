@@ -1,12 +1,12 @@
 .brand {
-    animation: rotation 5s infinite linear;
+  animation: rotation 5s infinite linear;
 }
 
 @keyframes rotation {
-    from {
-        transform: rotate(359deg);
-      }
-      to {
-        transform: rotate(0deg);
-      }
+  from {
+    transform: rotate(359deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
 }

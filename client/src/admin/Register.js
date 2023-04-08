@@ -59,8 +59,8 @@ const Register = () => {
           />
           <input
             id="isManager"
-            name="isManager" 
-            type="checkbox" 
+            name="isManager"
+            type="checkbox"
             className="mr-2"
             value={true}
             onChange={(e) => setIsManager(e.target.value)}

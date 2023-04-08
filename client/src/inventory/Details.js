@@ -31,26 +31,10 @@ const Details = () => {
         <hr className="p-2" />
       </div>
       <div className="">
-        <p
-            className="m-2 block px-2 w-full"
-        >
-            {details.ItemName}
-        </p>
-        <p
-            className="m-2 block px-2 w-full"
-        >
-            {details.Type}
-        </p>
-        <p
-            className="m-2 block px-2 w-full"
-        >
-            {details.Description}
-        </p>
-        <p
-            className="m-2 block px-2 w-full"
-        >
-            {details.Quantity}
-        </p>
+        <p className="m-2 block px-2 w-full">{details.ItemName}</p>
+        <p className="m-2 block px-2 w-full">{details.Type}</p>
+        <p className="m-2 block px-2 w-full">{details.Description}</p>
+        <p className="m-2 block px-2 w-full">{details.Quantity}</p>
       </div>
     </Modal>
   );

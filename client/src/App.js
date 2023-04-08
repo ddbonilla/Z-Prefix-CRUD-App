@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
-//components
+//Components
 import Navbar from "./common/Navbar";
 import Login from "./admin/Login";
 import Register from "./admin/Register";
@@ -30,7 +30,7 @@ function App() {
     })
       .then((response) => response.json())
       .then((userData) => setUser(userData));
-  }, [])
+  }, []);
 
   return (
     <inventoryContext.Provider value={{ items, setItems, user, setUser, url }}>

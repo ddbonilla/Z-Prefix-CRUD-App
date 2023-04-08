@@ -38,11 +38,11 @@ const EditItems = () => {
     fetch(`${url}/inventory/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(tempDetails)
+      body: JSON.stringify(tempDetails),
     })
-      .then(res => res.json())
-      .then((data)=> {
-        setDetails(data)
+      .then((res) => res.json())
+      .then((data) => {
+        setDetails(data);
         setChanged(false);
         console.log(data);
       })
@@ -113,12 +113,12 @@ const EditItems = () => {
             <button
               onClick={() => {
                 fetch(`${url}/inventory/${details.InvId}`, {
-                        method: "DELETE",
-                      }).then(() => {
-                        console.log("deleted...");
-                        setShowModal(false);
-                        navigate("/inventory");
-                      });
+                  method: "DELETE",
+                }).then(() => {
+                  console.log("deleted...");
+                  setShowModal(false);
+                  navigate("/inventory");
+                });
               }}
             >
               <RiDeleteBinLine />

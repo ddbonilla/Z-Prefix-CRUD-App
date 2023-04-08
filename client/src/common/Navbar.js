@@ -74,7 +74,6 @@ const Navbar = () => {
             setUser({});
             setIsVisible(isVisible);
           });
-
         }}
         className={
           "text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white"
@@ -104,9 +103,7 @@ const Navbar = () => {
           onClick={() => setOpen(!open)}
         />
         <div className="inline-flex py-6 px-5">
-          <GiBowlingPin
-            className="relative text-white bg-emerald-500 text-3xl rounded-full cursor-pointer block float-left mr-1"
-          />
+          <GiBowlingPin className="relative text-white bg-emerald-500 text-3xl rounded-full cursor-pointer block float-left mr-1" />
           <h1
             className={` text-white text-2xl font-medium 
                 ${!open && "scale-0"} duration-300`}
