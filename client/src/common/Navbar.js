@@ -14,7 +14,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
 
-  const { user, setUser } = useContext(inventoryContext);
+  const { url, user, setUser } = useContext(inventoryContext);
 
   let inventoryLink = (
     <Link
@@ -67,8 +67,14 @@ const Navbar = () => {
       <Link
         to="Login"
         onClick={() => {
-          setUser({});
-          setIsVisible(isVisible);
+          fetch(`${url}/logout`, {
+            method: "POST",
+            credentials: "include",
+          }).then(() => {
+            setUser({});
+            setIsVisible(isVisible);
+          });
+
         }}
         className={
           "text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white"

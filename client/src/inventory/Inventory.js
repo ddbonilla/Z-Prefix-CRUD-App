@@ -109,11 +109,17 @@ const Inventory = () => {
                         {items.length ? (
                           items.map((item, i) => (
                             <tr key={i}>
-                              <td
-                                key={i+1}
+                            <td
+                                key={i}
                                 className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                               >
-                                {item.ItemName}
+                                <Link
+                                  key={i}
+                                  to={`/details/${item.InvId}`}
+                                  className="px-6 py-4 text-left text-xs font-medium text-blue-700 whitespace-nowrap"
+                                >
+                                  {item.ItemName}
+                                </Link>
                               </td>
                               <td
                                 key={i+2}

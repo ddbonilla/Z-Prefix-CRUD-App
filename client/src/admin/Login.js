@@ -12,26 +12,25 @@ const Login = () => {
     const form = e.target;
     const formData = new FormData(form);
     const formJSON = Object.fromEntries(formData.entries());
-      
+
     fetch(`${url}/login`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
-        body: JSON.stringify(formJSON),
-      })
-      .then(res => res.json())
+      credentials: "include",
+      body: JSON.stringify(formJSON),
+    })
+      .then((res) => res.json())
       .then((data) => {
-        setUser(data)
+        setUser(data);
         navigate("/inventory");
       });
-    };
+  };
 
   return (
     <div className="w-1/3">
       <div className="p-6 w-full">
         <h3 className="text-xl font-semibold text-gray-900 mb-5">Log in</h3>
-        <form 
-          method="post"
-          onSubmit={handleLogin} className="space-y-6">
+        <form method="post" onSubmit={handleLogin} className="space-y-6">
           <label className="block mb-2 text-sm font-medium text-gray-900">
             UserName
           </label>
@@ -39,7 +38,7 @@ const Login = () => {
             type="text"
             name="Username"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-            placeholder="Username..."  
+            placeholder="Username..."
             required
           />
           <label className="block mb-2 text-sm font-medium text-gray-900">
