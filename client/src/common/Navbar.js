@@ -90,7 +90,7 @@ const Navbar = () => {
     <>
       <div
         className={`relative bg-emerald-800 h-screen 
-        ${open ? "w-72" : "w-20"} duration-300`}
+        ${open ? "w-70" : "w-20"} duration-300`}
       >
         <FaBowlingBall
           className={`brand absolute -right-4 top-7 rounded-full bg-emerald-900 text-white text-3xl
@@ -99,13 +99,13 @@ const Navbar = () => {
         />
         <div className="inline-flex py-6 px-5">
           <GiBowlingPin
-            className="relative text-white bg-emerald-500 text-4xl rounded-full cursor-pointer block float-left mr-1"
+            className="relative text-white bg-emerald-500 text-3xl rounded-full cursor-pointer block float-left mr-1"
           />
           <h1
-            className={` text-white text-4xl font-medium 
+            className={` text-white text-2xl font-medium 
                 ${!open && "scale-0"} duration-300`}
           >
-            Inventory
+            B.O.W.L.
           </h1>
         </div>
         <hr className="mx-4 border-1" />

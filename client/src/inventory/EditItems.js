@@ -14,11 +14,11 @@ const EditItems = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("details", details);
-    console.log("temp", tempDetails);
-    console.log("change", changed);
-  });
+  // useEffect(() => {
+  //   console.log("details", details);
+  //   console.log("temp", tempDetails);
+  //   console.log("change", changed);
+  // });
 
   const handleClose = () => {
     setShowModal(false);
@@ -42,6 +42,8 @@ const EditItems = () => {
     })
       .then(res => res.json())
       .then((data)=> {
+        setDetails(data)
+        setChanged(false);
         console.log(data);
       })
       .catch();
@@ -108,7 +110,17 @@ const EditItems = () => {
             </div>
           ) : null}
           <div className="mx-2">
-            <button>
+            <button
+              onClick={() => {
+                fetch(`${url}/inventory/${details.InvId}`, {
+                        method: "DELETE",
+                      }).then(() => {
+                        console.log("deleted...");
+                        setShowModal(false);
+                        navigate("/inventory");
+                      });
+              }}
+            >
               <RiDeleteBinLine />
             </button>
           </div>
