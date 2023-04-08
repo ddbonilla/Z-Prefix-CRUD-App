@@ -3,16 +3,19 @@
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
+
+require('dotenv').config()
+
 module.exports = {
 
   development: {
     client: 'pg',
     connection: {
-      host: '127.0.0.1',
-      password: 'docker',
-      database: 'bowling_inventory',
-      user: 'postgres',
-      port: 5432
+      host: process.env.POSTGRES_HOST || 'localhost',
+      password: process.env.POSTGRES_USER_PW || 'postgres',
+      database: process.env.POSTGRES_DB || 'postgres',
+      user: process.env.POSTGRES_USER || 'postgres',
+      port: process.env.POSTGRES_PORT || 5432,
   
     }
   },
