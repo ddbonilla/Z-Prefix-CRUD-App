@@ -2,16 +2,46 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
-const cookieParser = require('cookie-parser');
-
+const session = require("express-session");
+const KnexSessionStore = require("connect-session-knex")(session);
+const knex = require("./db/dbConnection.js");
 const app = express();
 
+//Packages Setup
 app.use(morgan("tiny"));
 app.use(express.json());
-app.use(cors())
-app.use(cookieParser())
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE"],
+    credentials: true,
+  })
+);
 
-//controllers
+//Cookie Session Setup and Storage
+const store = new KnexSessionStore({
+  knex,
+  tablename: "sessions",
+});
+
+app.use(
+  session({
+    store: store,
+    name: "bowling.sid",
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+      secure: false,
+      httpOnly: true,
+      sameSite: "lax",
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
+);
+
+//Controllers
 const {
   getAllItems,
   getOneItem,
@@ -22,7 +52,6 @@ const {
   createUser,
   getUserName,
   getUserItems,
-
 } = require("./db/controllers");
 const { Password } = require("@mui/icons-material");
 
@@ -39,7 +68,7 @@ app.get("/inventory", (req, res) => {
     });
 });
 
-//Managers
+//Managers View
 app.get("/inventory/:id", (req, res) => {
   getOneItem(req.params.id)
     .then((data) => {
@@ -50,7 +79,7 @@ app.get("/inventory/:id", (req, res) => {
     });
 });
 
-//Visitor
+//Visitor View
 app.get("/details/:id", (req, res) => {
   getOneItem(req.params.id)
     .then((data) => {
@@ -99,7 +128,7 @@ app.delete("/inventory/:id", (req, res) => {
     });
 });
 
-//Admin section
+//Manager Section
 app.get("/managers", (req, res) => {
   getManagers()
     .then((data) => {
@@ -113,16 +142,36 @@ app.get("/managers", (req, res) => {
 app.get("/managers/:username", (req, res) => {
   getUserName(req.params.username)
     .then((data) => {
-        res.send(data);
+      res.send(data);
     })
     .catch((err) => {
       res.send(err);
     });
 });
 
-app.post("/managers", (req, res) => {
+//Manager user inventory list
+app.get("/dashboard/:name", (req, res) => {
+  getUserItems(req.params.name)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
 
-  const userData = req.body
+// send user details to front end
+app.post("/fetch-user", async (req, res) => {
+  if (req.sessionID && req.session.user) {
+    res.status(200);
+    return res.json(req.session.user);
+  }
+  return res.sendStatus(403);
+});
+
+//Create Manager
+app.post("/managers", (req, res) => {
+  const userData = req.body;
   userData.Password = bcrypt.hashSync(userData.Password, 10);
 
   if (userData) {
@@ -138,37 +187,54 @@ app.post("/managers", (req, res) => {
   }
 });
 
+//Login Manager
 app.post("/login", async (req, res) => {
-
   const { Username, Password } = req.body;
 
   const resData = await getUserName(Username);
 
-  if(resData.length === 0) {
+  if (resData.length === 0) {
     console.log("user not found");
     return res.sendStatus(404);
   }
   const userData = resData[0];
 
-  const matches = bcrypt.compareSync(Password, userData.Password)
-  if(!matches) {
+  const matches = bcrypt.compareSync(Password, userData.Password);
+  if (!matches) {
     console.log("incorrect");
     return res.sendStatus(401);
   }
-  console.log("sending user", {Username: userData.Username, isManager: userData.isManager});
-  res.status(200).json({Username: userData.Username, isManager: userData.isManager})
+
+  //Cookie Session
+  req.session.user = {
+    UserId: userData.UserId,
+    Username: userData.Username,
+    Password: userData.Password,
+    isManager: userData.isManager,
+  };
+
+  console.log("sending user", {
+    Username: userData.Username,
+    isManager: userData.isManager,
+  });
+  res
+    .status(200)
+    .json({ Username: userData.Username, isManager: userData.isManager });
 });
 
-app.get('/dashboard/:name', (req, res) => {
-  getUserItems(req.params.name)
-    .then(data => {
-      res.send(data)
-    })
-    .catch((err)=>{
-      res.send(err);
-    })
-})
-
-
+//Logoff Manager/Clear Cookies
+app.post("/logout", async (req, res) => {
+  try {
+    await req.session.destroy();
+    console.log("logout successful");
+    res.clearCookie("bowling.sid");
+    return res.status(401).json({
+      error: "logout successful",
+    });
+  } catch (err) {
+    console.error(err);
+    return res.sendStatus(500);
+  }
+});
 
 module.exports = app;
