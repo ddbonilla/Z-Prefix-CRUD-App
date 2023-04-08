@@ -42,7 +42,19 @@ app.get("/inventory", (req, res) => {
     });
 });
 
+//Managers
 app.get("/inventory/:id", (req, res) => {
+  getOneItem(req.params.id)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+//Visitor
+app.get("/details/:id", (req, res) => {
   getOneItem(req.params.id)
     .then((data) => {
       res.send(data);
@@ -58,6 +70,7 @@ app.post("/inventory", (req, res) => {
     addItem(req.body)
       .then((data) => {
         res.send(data);
+        console.log("data send", data);
       })
       .catch((err) => {
         res.send(err);

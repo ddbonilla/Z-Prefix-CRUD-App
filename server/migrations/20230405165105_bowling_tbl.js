@@ -13,6 +13,7 @@ exports.up = function (knex) {
     .createTable("bowling_tbl", (table) => {
       table.increments("InvId").primary();
       table.string("ItemName").notNullable();
+      table.string("Type");
       table.string("Description");
       table.integer("Quantity");
 
