@@ -34,7 +34,7 @@ function App() {
 
   return (
     <inventoryContext.Provider value={{ items, setItems, user, setUser, url }}>
-      <div className="flex duration-300">
+      <div className="flex w-full">
         <Navbar />
         <div className="grid grid-flow-col w-full h-screen">
           <Routes>

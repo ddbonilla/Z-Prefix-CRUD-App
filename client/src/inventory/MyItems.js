@@ -25,20 +25,28 @@ const MyItems = () => {
 
   return (
     <>
-      <div className="col-span-6 place-items-center max-h-fit w-full border border-gray-700">
+      <div className="flex max-h-fit w-full">
         <div className="px-9 mt-5">
-          {!user.Username ? null : (
-            <div className="italic text-sm">
-              Inventory Manager:{" "}
-              <span className="font-semibold">{user.Username}</span>
+          <div className="p-5 rounded-md bg-slate-700 shadow-md">
+            <div className="inline-flex justify-between">
+              <h3 className="font-semibold text-slate-100">
+                Basic Organizational Worksheet Log
+                <span className="text-xs ml-1">v. 1.0</span>
+              </h3>
             </div>
-          )}
-          <hr className="p-2" />
-          <div className="px-10 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-            Total Items: {totalEntries}
+            {!user.Username ? null : (
+              <div className="italic text-sm text-emerald-300 mt-4">
+                Inventory Manager:{" "}
+                <span className="font-semibold">{user.Username}</span>
+              </div>
+            )}
+            <hr className="p-2" />
           </div>
-          <div className="mt-2 flex flex-col">
+          <div className="mt-2 flex flex-col rounded-md w-fit bg-slate-600">
             <div className="my-2 overflow-x-auto -mx-4 sm:mx-6 lg:mx-2">
+              <div className="px-10 text-right text-xs font-medium text-gray-100 uppercase tracking-wider">
+                Total Items: {totalEntries}
+              </div>
               <div className="py-2 align-middle inline-block min-w-full">
                 <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                   <table className="min-w-full divide-y divide-gray-200">
@@ -61,7 +69,7 @@ const MyItems = () => {
                           <tr key={i}>
                             <td
                               key={i}
-                              className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
+                              className="py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                             >
                               <Link
                                 key={i}

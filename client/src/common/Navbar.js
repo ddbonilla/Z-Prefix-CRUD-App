@@ -20,7 +20,7 @@ const Navbar = () => {
     <Link
       to="inventory"
       className={
-        "text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white"
+        "text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 rounded-md hover:bg-light-white"
       }
     >
       <MdOutlineInventory className="text-xl block float-left" />
@@ -48,12 +48,12 @@ const Navbar = () => {
     <Link
       to="Login"
       className={
-        "text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white"
+        "text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 rounded-md hover:bg-light-white"
       }
     >
       <AiOutlineUser className="text-xl block float-left" />
       <span
-        className={`text-base font-medium flex-1 ${
+        className={`text-base font-medium flex-1 rounded-md ${
           !open && "hidden"
         } duration-300`}
       >
@@ -76,12 +76,12 @@ const Navbar = () => {
           });
         }}
         className={
-          "text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white"
+          "text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 rounded-md hover:bg-light-white"
         }
       >
         <AiOutlineUser className="text-xl block float-left" />
         <span
-          className={`text-base font-medium flex-1 ${
+          className={`text-base font-medium flex-1 rounded-md ${
             !open && "hidden"
           } duration-300`}
         >
@@ -94,16 +94,19 @@ const Navbar = () => {
   return (
     <>
       <div
-        className={`relative bg-emerald-800 h-screen 
-        ${open ? "w-70" : "w-20"} duration-300`}
+        className={`relative bg-emerald-900 h-screen ${
+          open ? "w-48" : "w-20"
+        } duration-300`}
       >
         <FaBowlingBall
-          className={`brand absolute -right-4 top-7 rounded-full bg-emerald-900 text-white text-3xl
+          className={`brand absolute ${!open ? "right-7" : "right-1"} top-16 rounded-full bg-emerald-900 text-emerald-400 text-3xl
             cursor-pointer ${!open && "rotate-[360deg]"} duration-300`}
-          onClick={() => setOpen(!open)}
+          onClick={() => {
+            setOpen(!open);
+          }}
         />
         <div className="inline-flex py-6 px-5">
-          <GiBowlingPin className="relative text-white bg-emerald-500 text-3xl rounded-full cursor-pointer block float-left mr-1" />
+          <GiBowlingPin className="relative text-white bg-emerald-500 text-3xl rounded-full block float-left mr-2" />
           <h1
             className={` text-white text-2xl font-medium 
                 ${!open && "scale-0"} duration-300`}
@@ -121,7 +124,7 @@ const Navbar = () => {
                 <Link
                   key={i}
                   to={link.name}
-                  className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2
+                  className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 rounded-md
                           hover:bg-light-white ${
                             !user.Username && isVisible && "hidden"
                           } `}
