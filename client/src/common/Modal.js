@@ -14,7 +14,7 @@ const Modal = ({ isVisible, onClose, children }) => {
         className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center"
         onClick={handleClose}
       >
-        <div className="relative md:w-[60%] w-[90%] h-[50%] flex flex-col">
+        <div className="relative md:w-[60%] w-[90%] h-[90%] flex flex-col">
           <button
             className="text-black text=xl place-self-end absolute right-2 top-2"
             onClick={() => onClose()}

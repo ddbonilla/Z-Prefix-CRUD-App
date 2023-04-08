@@ -27,11 +27,12 @@ const Login = () => {
   };
 
   return (
-    <div className="w-1/3">
+    <div className="w-3/6 bg-slate-700">
       <div className="p-6 w-full">
-        <h3 className="text-xl font-semibold text-gray-900 mb-5">Log in</h3>
-        <form method="post" onSubmit={handleLogin} className="space-y-6">
-          <label className="block mb-2 text-sm font-medium text-gray-900">
+        <h3 className="text-2xl text-center font-semibold text-slate-200 mb-1">Log in</h3>
+        <hr className="mb-4"/>
+        <form method="post" onSubmit={handleLogin} className="space-y-4">
+          <label className="block mb-2 text-sm font-medium text-slate-100">
             UserName
           </label>
           <input
@@ -41,7 +42,7 @@ const Login = () => {
             placeholder="Username..."
             required
           />
-          <label className="block mb-2 text-sm font-medium text-gray-900">
+          <label className="block mb-2 text-sm font-medium text-slate-100">
             {" "}
             Password
           </label>
@@ -54,13 +55,13 @@ const Login = () => {
           />
           <button
             type="submit"
-            className="w-full text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none rounded-lg py-2.5 px-5 text-center font-medium text-small"
+            className="w-full text-white bg-emerald-600 hover:bg-emerald-500 focus:ring-4 focus:outline-none rounded-lg py-2.5 px-5 text-center font-medium text-small"
           >
             Log In
           </button>
           <div>
-            <Link to={"/signup"} className="mt-4">
-              Sign Up
+            <Link to={"/signup"} className="mt-4 float-right text-emerald-500">
+              Register
             </Link>
           </div>
         </form>

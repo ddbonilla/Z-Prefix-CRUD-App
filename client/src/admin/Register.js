@@ -30,11 +30,12 @@ const Register = () => {
   };
 
   return (
-    <div className="w-1/3">
+    <div className="w-3/6 bg-slate-700">
       <div className="p-6 w-full">
-        <h3 className="text-xl font-semibold text-gray-900 mb-5">Sign Up</h3>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <label className="block mb-2 text-sm font-medium text-gray-900">
+        <h3 className="text-2xl text-center font-semibold text-slate-100 mb-5">Register</h3>
+        <hr className="mb-4"/>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <label className="block mb-2 text-sm font-medium text-slate-100">
             UserName
           </label>
           <input
@@ -45,7 +46,7 @@ const Register = () => {
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-          <label className="block mb-2 text-sm font-medium text-gray-900">
+          <label className="block mb-2 text-sm font-medium text-slate-100">
             {" "}
             Password
           </label>
@@ -65,10 +66,10 @@ const Register = () => {
             value={true}
             onChange={(e) => setIsManager(e.target.value)}
           />
-          <label htmlFor="isManager">Register as a Manager</label>
+          <label htmlFor="isManager" className="mt-4 text-emerald-500">Register as a Manager</label>
           <button
             type="submit"
-            className="w-full text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none rounded-lg py-2.5 px-5 text-center font-medium text-small"
+            className="w-full text-white bg-slate-800 hover:bg-gray-600 focus:ring-4 focus:outline-none rounded-lg py-2.5 px-5 text-center font-medium text-small"
           >
             Register
           </button>
