@@ -5,182 +5,114 @@ import Modal from "../common/Modal";
 import { RiDeleteBinLine } from "react-icons/ri";
 
 const EditItems = () => {
-  const { url } = useContext(inventoryContext);
+  const { user, url } = useContext(inventoryContext);
   const [details, setDetails] = useState([]);
+  const [tempDetails, setTempDetails] = useState([]);
   const [showModal, setShowModal] = useState(true);
+  const [changed, setChanged] = useState(false);
 
   const { id } = useParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("details", details);
+    console.log("temp", tempDetails);
+    console.log("change", changed);
+  });
 
   const handleClose = () => {
     setShowModal(false);
     navigate("/inventory");
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   let update = {
-  //     ItemName: itemName,
-  //     Description: itemDesc,
-  //     Quantity: itemQty,
-  //     UserId: manager,
-  //   };
-
-  //   fetch(`${url}/inventory/${id}`, {
-  //     method: "PUT",
-  //     headers: { "Content-type": "application/json" },
-  //     body: JSON.stringify(update),
-  //   }).then(() => {
-  //     console.log(update);
-  //   });
-  // };
-
   useEffect(() => {
-    console.log("useEffect");
     fetch(`${url}/inventory/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setDetails(data);
-        console.log(data);
+        setDetails(data[0]);
+        setTempDetails(data[0]);
       });
   }, []);
 
+  const handleUpdate = () => {
+    fetch(`${url}/inventory/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(tempDetails)
+    })
+      .then(res => res.json())
+      .then((data)=> {
+        console.log(data);
+      })
+      .catch();
+  };
+
   return (
     <Modal isVisible={showModal} onClose={handleClose}>
-      <div className="p-6">
-        {details ? (
-          <>
-            {details.map((detail, i) => (
-              <div key={i+20}>
-                <div key={i}>
-                  <form
-                    key={i+1}
-                    className="w-full max-w-sm"
-                    onSubmit={(e) => {
-                      e.preventDefault();
-
-                      let update = {
-                        ItemName: detail.ItemName,
-                        Description: detail.Description,
-                        Quantity: detail.Quantity,
-                        UserId: detail.UserId,
-                      };
-
-                      fetch(`${url}/inventory/${id}`, {
-                        method: "PUT",
-                        headers: { "Content-type": "application/json" },
-                        body: JSON.stringify([update]),
-                      }).then(() => {
-                        console.log(update);
-                      });
-                    }}
-                  >
-                    <div
-                      key={i+2}
-                      className="flex flex-col md: items-center mb-6"
-                    >
-                      <div key={i+3} className="md:w-1/3">
-                        <label
-                          key={i+4}
-                          htmlFor="name"
-                          className="block text-gray-500 font-bold text-left mb-1"
-                        >
-                          Item Name
-                        </label>
-                      </div>
-                      <div key={i+5} className="md:w-2/3 ml-5">
-                        <input
-                          key={i+6}
-                          id="name"
-                          type="text"
-                          className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-md p-1"
-                          placeholder="Item Name"
-                          value={detail.ItemName}
-                          onChange={(e) => setDetails(e.target.value)}
-                        />
-                      </div>
-                      <div key={i+7} className="md:w-1/3">
-                        <label
-                          key={i+8}
-                          htmlFor="desc"
-                          className="block text-gray-500 font-bold text-left mb-1"
-                        >
-                          Description
-                        </label>
-                      </div>
-                      <div key={i+9} className="md:w-2/3 ml-5">
-                        <input
-                          key={i+10}
-                          id="desc"
-                          type="text"
-                          className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-md p-1"
-                          placeholder="Description"
-                          value={detail.Description}
-                          onChange={(e) => setDetails(e.target.value)}
-                        />
-                      </div>
-                      <div key={i+11} className="md:w-1/3">
-                        <label
-                          key={i+12}
-                          htmlFor="qty"
-                          className="block text-gray-500 font-bold text-left mb-1"
-                        >
-                          Quantity
-                        </label>
-                      </div>
-                      <div key={i+13} className="md:w-2/3 ml-5">
-                        <input
-                          key={i+14}
-                          id="qty"
-                          type="text"
-                          className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-md p-1"
-                          placeholder="Description"
-                          value={detail.Quantity}
-                          onChange={(e) => setDetails(e.target.value)}
-                        />
-                      </div>
-                      <div key={i+15} className="md:w-1/3">
-                        <label
-                          key={i+16}
-                          htmlFor="manager"
-                          className="block text-gray-500 font-bold text-left mb-1"
-                        >
-                          Manager
-                        </label>
-                      </div>
-                      <div key={i+17} className="md:w-2/3 ml-5">
-                        <input
-                          key={i+18}
-                          id="manager"
-                          type="text"
-                          className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-md p-1"
-                          placeholder="Description"
-                          value={detail.UserId}
-                          onChange={(e) => setDetails(e.target.value)}
-                        />
-                      </div>
-                    </div>
-                  </form>
-                  <button
-                    key={i + 19}
-                    onClick={() => {
-                      fetch(`${url}/inventory/${detail.InvId}`, {
-                        method: "DELETE",
-                      }).then(() => {
-                        console.log("deleted...");
-                        setShowModal(false);
-                        navigate("/inventory");
-                      });
-                    }}
-                  >
-                    <RiDeleteBinLine />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </>
-        ) : null}
+      <div>
+        <div>{user.Username}</div>
+        <hr className="p-2" />
+      </div>
+      <div className="">
+        <input
+          className="m-2 block px-2 w-full border border-1"
+          type="text"
+          value={tempDetails.ItemName}
+          onChange={(e) => {
+            setChanged(true);
+            setTempDetails({ ...tempDetails, ItemName: e.target.value });
+          }}
+        />
+        <input
+          className="m-2 block px-2 w-full"
+          type="text"
+          value={tempDetails.Type}
+          onChange={(e) => {
+            setChanged(true);
+            setTempDetails({ ...tempDetails, Type: e.target.value });
+          }}
+        />
+        <textarea
+          className="m-2 block px-2 w-full"
+          type="text"
+          value={tempDetails.Description}
+          onChange={(e) => {
+            setChanged(true);
+            setTempDetails({ ...tempDetails, Description: e.target.value });
+          }}
+        />
+        <input
+          className="m-2 block px-2 w-full"
+          type="text"
+          value={tempDetails.Quantity}
+          onChange={(e) => {
+            setChanged(true);
+            setTempDetails({ ...tempDetails, Quantity: e.target.value });
+          }}
+        />
+        <div className="inline-flex float-right px-2">
+          {changed ? (
+            <div className="">
+              <button className="mx-2" onClick={handleUpdate}>
+                Save
+              </button>
+              <button
+                className="mx-2"
+                onClick={(e) => {
+                  setTempDetails({ ...details });
+                  setChanged(false);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          ) : null}
+          <div className="mx-2">
+            <button>
+              <RiDeleteBinLine />
+            </button>
+          </div>
+        </div>
       </div>
     </Modal>
   );

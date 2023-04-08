@@ -81,7 +81,7 @@ const MyItems = () => {
                               key={i + 3}
                               className="px-6 py-4 text-left text-xs font-medium text-gray-700 whitespace-nowrap"
                             >
-                              {item.Description.subString(0,100)+"..."}
+                              {item.Description.substring(0,100)+"..."}
                             </td>
                             <td
                               key={i + 4}
